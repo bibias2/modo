@@ -1,27 +1,215 @@
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Optima', 'Palatino', Georgia, serif; }
-.wrap { max-width: 600px; margin: 0 auto; padding: 2rem 1.5rem 3rem; }
-.brand { font-size: 11px; letter-spacing: 0.22em; color: var(--color-text-tertiary); text-transform: uppercase; margin-bottom: 0.4rem; }
-.title { font-size: 20px; font-weight: 400; color: var(--color-text-primary); letter-spacing: 0.06em; margin-bottom: 0.5rem; }
-.subtitle { font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; margin-bottom: 2.5rem; }
-.section-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 1rem; }
-.section { margin-bottom: 2rem; }
-.stones-row { display: flex; gap: 10px; flex-wrap: wrap; }
-.stone-opt { cursor: pointer; border: 1px solid var(--color-border-tertiary); border-radius: 4px; padding: 6px 10px; background: var(--color-background-primary); transition: border-color 0.2s, background 0.2s; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 70px; }
-.stone-opt:hover { border-color: var(--color-border-secondary); }
-.stone-opt.active { border-color: #6C6B6A; background: #F8F8F8; }
-.stone-opt svg { display: block; }
-.stone-opt span { font-size: 10px; letter-spacing: 0.1em; color: var(--color-text-tertiary); text-transform: uppercase; }
-.divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 2rem 0; }
-.preview-box { background: #FFFDF8; border: 0.5px solid var(--color-border-tertiary); border-radius: 4px; padding: 2rem 1.5rem; display: flex; flex-direction: column; align-items: center; min-height: 220px; justify-content: flex-end; margin-bottom: 2rem; position: relative; }
-.preview-label { position: absolute; top: 1rem; left: 1.2rem; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-tertiary); }
-.preview-stones { display: flex; flex-direction: column; align-items: center; gap: 0; }
-.text-area-wrap { margin-bottom: 1.5rem; }
-.text-area-wrap label { display: block; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 0.5rem; }
-input[type="text"], textarea { width: 100%; border: 0.5px solid var(--color-border-tertiary); background: var(--color-background-primary); color: var(--color-text-primary); font-family: inherit; font-size: 13px; padding: 10px 12px; border-radius: 4px; outline: none; }
-input[type="text"]:focus, textarea:focus { border-color: #6C6B6A; }
-textarea { resize: none; height: 72px; line-height: 1.6; }
-.send-btn { width: 100%; padding: 12px; background: #353533; color: #F8F8F8; border: none; border-radius: 4px; font-family: inherit; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
-.send-btn:hover { background: #6C6B6A; }
-.send-btn:disabled { background: var(--color-border-tertiary); color: var(--color-text-tertiary); cursor: default; }
-.confirm-msg { display: none; text-align: center; font-size: 12px; color: var(--color-text-secondary); letter-spacing: 0.08em; padding: 1rem; line-height: 1.8; }
+/* === MODO: panel-style UI (matches the CSS you pasted) === */
+
+*{ box-sizing:border-box; }
+
+html, body{
+  margin:0; width:100%; height:100%;
+  font-family:"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  background:#e5e3e3; color:#231d1a;
+}
+
+/* allow scrolling (your pasted CSS had overflow:hidden; but your page needs scroll) */
+body{ overflow:auto; }
+
+/* Main panel */
+.wrap{
+  position:relative;
+  width: min(520px, calc(100vw - 40px));
+  margin: 20px;
+  padding: 12px;
+  background:#e5e3e3;
+  border:2px solid #231d1a;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  border-radius:0;
+}
+
+/* Header text */
+.brand{
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  margin:0 0 6px 0;
+}
+.title{
+  font-size:16px;
+  margin:0 0 10px 0;
+  font-weight:800;
+}
+.subtitle{
+  font-size:14px;
+  line-height:1.4;
+  border:2px solid #231d1a;
+  padding:10px;
+  background:#e5e3e3;
+  margin:0 0 12px 0;
+  color:#231d1a;
+  font-weight:600;
+}
+
+/* Preview always on top (inside the panel) */
+.preview-box{
+  background:#e5e3e3;
+  border:2px solid #231d1a;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  padding:12px;
+  margin: 0 0 16px 0;
+  position:relative;
+  overflow:hidden;
+}
+.preview-label{
+  position:static;           /* your HTML uses absolute label styles; normalize */
+  display:block;
+  font-size:12px;
+  font-weight:900;
+  margin-bottom:8px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:#231d1a;
+}
+.preview-stones{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* Sections */
+.section{
+  margin-bottom:10px;
+}
+.section-label{
+  font-weight:700;
+  font-size:14px;
+  margin:0 0 6px 0;
+  letter-spacing:0.02em;
+  text-transform:none;
+  color:#231d1a;
+}
+
+/* Options row -> horizontal scroll like your pasted .options */
+.stones-row{
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
+  padding-bottom:6px;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+.stones-row::-webkit-scrollbar{ display:none; }
+
+/* Option tiles */
+.stone-opt{
+  width:35px;
+  height:47px;
+  border:none;
+  background:#e5e3e3;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  flex:0 0 auto;
+  border-radius:0;
+}
+.stone-opt svg{
+  width:100%;
+  height:100%;
+  display:block;
+  pointer-events:none;
+}
+.stone-opt span{
+  display:none; /* hide labels to match icon-only option style */
+}
+.stone-opt.active{
+  box-shadow: inset 0 0 0 2px #231d1a;
+  background:#e5e3e3;
+}
+
+/* Divider */
+.divider{
+  border:none;
+  border-top:2px solid #231d1a;
+  margin:12px 0;
+}
+
+/* Inputs */
+.text-area-wrap label{
+  font-size:15px;
+  font-weight:700;
+  margin-top:10px;
+  display:block;
+}
+input[type="text"], textarea{
+  width:100%;
+  border:2px solid #231d1a;
+  padding:6px;
+  margin-top:4px;
+  font-size:12px;
+  outline:none;
+  background:#e5e3e3;
+  color:#231d1a;
+  border-radius:0;
+}
+textarea{
+  height:90px;
+  resize:none;
+}
+
+/* Button */
+.send-btn{
+  width:100%;
+  margin-top:10px;
+  padding:14px 12px;
+  background:#231d1a;
+  color:#e5e3e3;
+  border:2px solid #231d1a;
+  cursor:pointer;
+  font-size:16px;
+  font-weight:700;
+  border-radius:0;
+}
+.send-btn:disabled{
+  opacity:0.5;
+  cursor:not-allowed;
+}
+
+/* Confirmation */
+.confirm-msg{
+  border:2px solid #231d1a;
+  margin-top:12px;
+  padding:12px;
+  background:#e5e3e3;
+  color:#231d1a;
+}
+
+/* Mobile */
+@media (max-width:768px){
+  .wrap{
+    width: calc(100vw - 20px);
+    margin: 10px;
+  }
+
+  /* Make option grid like your pasted mobile layout */
+  .stones-row{
+    display:grid;
+    grid-template-columns:repeat(7, minmax(0, 1fr));
+    gap:0.28rem;
+    overflow:visible;
+    padding-bottom:0.12rem;
+    justify-items:center;
+  }
+  .stone-opt{
+    width:100%;
+    height:auto;
+    aspect-ratio:34 / 46;
+  }
+  .stone-opt svg{
+    width:90%;
+    height:90%;
+  }
+
+  input[type="text"], textarea{
+    font-size:16px; /* iOS zoom prevention */
+  }
+}
