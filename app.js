@@ -54,7 +54,7 @@ function sendCard() {
 
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.stone-opt').forEach(function(el) {
-    el.addEventListener('click', function() { select(el); });
+    el.addEventListener('click', function() { select(this); });
   });
 
   document.getElementById('send-btn').addEventListener('click', sendCard);
