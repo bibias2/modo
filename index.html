@@ -13,6 +13,17 @@
   <h1 class="title">Compose your stone</h1>
   <p class="subtitle">Select a stone for each layer — base, middle, and top — to build your ritual object. Each configuration is unique.</p>
 
+  <!-- moved up: preview is now always on top -->
+  <div class="preview-box" id="preview-box">
+    <span class="preview-label">Your composition</span>
+    <div class="preview-stones" id="preview-stones">
+      <svg id="prev-top" width="80" height="40" viewBox="0 0 80 40" style="display:none"></svg>
+      <svg id="prev-mid" width="100" height="42" viewBox="0 0 100 42" style="display:none"></svg>
+      <svg id="prev-base" width="130" height="44" viewBox="0 0 130 44" style="display:none"></svg>
+    </div>
+    <p id="preview-hint" style="font-size:11px;letter-spacing:0.1em;color:var(--color-text-tertiary);text-transform:uppercase;margin-top:1.5rem;">Select all three stones</p>
+  </div>
+
   <div class="section">
     <p class="section-label">Base stone</p>
     <div class="stones-row" id="base-row">
@@ -80,16 +91,6 @@
   </div>
 
   <hr class="divider">
-
-  <div class="preview-box" id="preview-box">
-    <span class="preview-label">Your composition</span>
-    <div class="preview-stones" id="preview-stones">
-      <svg id="prev-top" width="80" height="40" viewBox="0 0 80 40" style="display:none"></svg>
-      <svg id="prev-mid" width="100" height="42" viewBox="0 0 100 42" style="display:none"></svg>
-      <svg id="prev-base" width="130" height="44" viewBox="0 0 130 44" style="display:none"></svg>
-    </div>
-    <p id="preview-hint" style="font-size:11px;letter-spacing:0.1em;color:var(--color-text-tertiary);text-transform:uppercase;margin-top:1.5rem;">Select all three stones</p>
-  </div>
 
   <div class="text-area-wrap">
     <label for="from-field">From</label>
